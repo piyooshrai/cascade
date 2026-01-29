@@ -4,116 +4,238 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      {/* Header */}
-      <header className="border-b border-[#2a2a2a]">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="font-mono text-lg">
-            the<span className="text-[#3b82f6]">Algorithm</span>
-          </div>
+    <div style={{
+      minHeight: '100vh',
+      background: '#0a0a0a',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontFamily: "'DM Sans', sans-serif"
+    }}>
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto',
+        padding: '0 20px',
+        textAlign: 'center'
+      }}>
+        {/* Main Heading */}
+        <h1 style={{
+          fontSize: 'clamp(48px, 8vw, 96px)',
+          fontWeight: 700,
+          marginBottom: '24px',
+          letterSpacing: '-2px',
+          background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text'
+        }}>
+          Cascade
+        </h1>
+
+        {/* Subtitle */}
+        <p style={{
+          fontSize: 'clamp(24px, 3vw, 36px)',
+          color: '#a0a0a0',
+          marginBottom: '48px',
+          fontWeight: 500
+        }}>
+          AI-Powered Presentation Platform
+        </p>
+
+        {/* Description */}
+        <p style={{
+          fontSize: '18px',
+          color: '#707070',
+          marginBottom: '48px',
+          maxWidth: '600px',
+          margin: '0 auto 48px',
+          lineHeight: 1.6
+        }}>
+          Generate beautiful, personalized presentations from any URL.
+          Powered by Claude AI.
+        </p>
+
+        {/* CTA Buttons */}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'row',
+          gap: '16px',
+          justifyContent: 'center',
+          marginBottom: '80px',
+          flexWrap: 'wrap'
+        }}>
           <Link
             href="/dashboard"
-            className="text-sm text-gray-400 hover:text-white transition-colors"
+            style={{
+              padding: '16px 32px',
+              background: '#3b82f6',
+              color: 'white',
+              textDecoration: 'none',
+              borderRadius: '8px',
+              fontSize: '16px',
+              fontWeight: 600,
+              transition: 'all 0.3s ease',
+              display: 'inline-block',
+              textTransform: 'uppercase',
+              letterSpacing: '0.5px'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#2563eb';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(59, 130, 246, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#3b82f6';
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
           >
-            Dashboard →
+            Go to Dashboard
+          </Link>
+          <Link
+            href="/dashboard/new"
+            style={{
+              padding: '16px 32px',
+              background: '#141414',
+              color: 'white',
+              textDecoration: 'none',
+              borderRadius: '8px',
+              fontSize: '16px',
+              fontWeight: 600,
+              border: '1px solid #2a2a2a',
+              transition: 'all 0.3s ease',
+              display: 'inline-block',
+              textTransform: 'uppercase',
+              letterSpacing: '0.5px'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#1a1a1a';
+              e.currentTarget.style.borderColor = '#3b82f6';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#141414';
+              e.currentTarget.style.borderColor = '#2a2a2a';
+              e.currentTarget.style.transform = 'translateY(0)';
+            }}
+          >
+            Create Presentation
           </Link>
         </div>
-      </header>
 
-      {/* Hero Section */}
-      <main className="max-w-7xl mx-auto px-6">
-        <div className="py-32 text-center">
-          <h1 className="text-8xl font-bold mb-8 tracking-tight">
-            Cascade
-          </h1>
-          <p className="text-2xl text-gray-400 mb-4 font-light">
-            AI-Powered Presentation Platform
-          </p>
-          <p className="text-base text-gray-500 max-w-2xl mx-auto mb-12">
-            Generate professional presentations from any URL using Claude AI.
-            Structured content, personalized messaging, three distinctive themes.
-          </p>
-
-          <div className="flex gap-4 justify-center mb-32">
-            <Link
-              href="/dashboard/new"
-              className="bg-[#3b82f6] hover:bg-[#2563eb] text-white px-8 py-3 rounded font-medium transition-colors"
-            >
-              Create Presentation
-            </Link>
-            <Link
-              href="/dashboard"
-              className="bg-[#141414] hover:bg-[#1f1f1f] text-white px-8 py-3 rounded border border-[#2a2a2a] font-medium transition-colors"
-            >
-              View Dashboard
-            </Link>
-          </div>
-        </div>
-
-        {/* Features Grid */}
-        <div className="grid md:grid-cols-3 gap-px bg-[#2a2a2a] border border-[#2a2a2a] mb-32">
-          <div className="bg-[#0a0a0a] p-12">
-            <div className="text-sm text-gray-500 uppercase tracking-wider mb-4 font-mono">
-              01
-            </div>
-            <h3 className="text-xl font-semibold mb-4">
-              Three Professional Themes
+        {/* Feature Cards */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '24px',
+          marginTop: '80px'
+        }}>
+          <div style={{
+            background: '#141414',
+            border: '1px solid #2a2a2a',
+            borderRadius: '12px',
+            padding: '32px',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-4px)';
+            e.currentTarget.style.borderColor = '#3b82f6';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.borderColor = '#2a2a2a';
+          }}>
+            <h3 style={{
+              fontSize: '20px',
+              fontWeight: 600,
+              marginBottom: '12px',
+              color: '#ffffff'
+            }}>
+              Three Themes
             </h3>
-            <p className="text-gray-400 leading-relaxed">
-              Executive, Minimal, and Tech themes with sophisticated animations
-              and precise typography. Each theme tailored for different presentation contexts.
+            <p style={{
+              fontSize: '14px',
+              color: '#a0a0a0',
+              lineHeight: 1.6
+            }}>
+              Executive, Minimal, and Tech themes with stunning animations
             </p>
           </div>
 
-          <div className="bg-[#0a0a0a] p-12">
-            <div className="text-sm text-gray-500 uppercase tracking-wider mb-4 font-mono">
-              02
-            </div>
-            <h3 className="text-xl font-semibold mb-4">
-              AI Content Structuring
+          <div style={{
+            background: '#141414',
+            border: '1px solid #2a2a2a',
+            borderRadius: '12px',
+            padding: '32px',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-4px)';
+            e.currentTarget.style.borderColor = '#3b82f6';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.borderColor = '#2a2a2a';
+          }}>
+            <h3 style={{
+              fontSize: '20px',
+              fontWeight: 600,
+              marginBottom: '12px',
+              color: '#ffffff'
+            }}>
+              AI-Powered
             </h3>
-            <p className="text-gray-400 leading-relaxed">
-              Claude AI analyzes source content and generates coherent,
-              business-focused slides. Automatic personalization for client-specific messaging.
+            <p style={{
+              fontSize: '14px',
+              color: '#a0a0a0',
+              lineHeight: 1.6
+            }}>
+              Claude AI generates coherent, business-focused content
             </p>
           </div>
 
-          <div className="bg-[#0a0a0a] p-12">
-            <div className="text-sm text-gray-500 uppercase tracking-wider mb-4 font-mono">
-              03
-            </div>
-            <h3 className="text-xl font-semibold mb-4">
-              Instant Sharing
+          <div style={{
+            background: '#141414',
+            border: '1px solid #2a2a2a',
+            borderRadius: '12px',
+            padding: '32px',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-4px)';
+            e.currentTarget.style.borderColor = '#3b82f6';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.borderColor = '#2a2a2a';
+          }}>
+            <h3 style={{
+              fontSize: '20px',
+              fontWeight: 600,
+              marginBottom: '12px',
+              color: '#ffffff'
+            }}>
+              Easy Sharing
             </h3>
-            <p className="text-gray-400 leading-relaxed">
-              Share presentations via unique public links. No authentication required
-              for viewers. Full keyboard navigation and presentation controls.
+            <p style={{
+              fontSize: '14px',
+              color: '#a0a0a0',
+              lineHeight: 1.6
+            }}>
+              Share presentations with unique public links
             </p>
           </div>
         </div>
 
-        {/* Tech Stack */}
-        <div className="border-t border-[#2a2a2a] py-12 mb-12">
-          <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-500 font-mono">
-            <span>Next.js 14+</span>
-            <span className="text-gray-700">•</span>
-            <span>Supabase</span>
-            <span className="text-gray-700">•</span>
-            <span>Claude API</span>
-            <span className="text-gray-700">•</span>
-            <span>TypeScript</span>
-            <span className="text-gray-700">•</span>
-            <span>Tailwind CSS</span>
-          </div>
+        {/* Footer */}
+        <div style={{
+          marginTop: '80px',
+          fontSize: '13px',
+          color: '#707070'
+        }}>
+          Built with Next.js, Supabase, and Anthropic Claude
         </div>
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t border-[#2a2a2a] py-8">
-        <div className="max-w-7xl mx-auto px-6 text-center text-sm text-gray-600">
-          Built by The Algorithm
-        </div>
-      </footer>
+      </div>
     </div>
   );
 }
