@@ -64,7 +64,12 @@ export async function POST(request: NextRequest) {
     if (error) {
       console.error('Database error:', error);
       return NextResponse.json(
-        { error: 'Failed to save presentation to database' },
+        {
+          error: 'Failed to save presentation to database',
+          details: error.message,
+          code: error.code,
+          hint: error.hint
+        },
         { status: 500 }
       );
     }
