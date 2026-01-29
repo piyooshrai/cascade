@@ -49,54 +49,26 @@ npm install
 
 3. Set up environment variables:
 ```bash
-cp .env.example .env
+cp .env.example .env.local
 ```
 
-Edit `.env` and add your credentials:
+Edit `.env.local` and add your credentials:
 ```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
-ANTHROPIC_API_KEY=your_anthropic_api_key
-NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+ANTHROPIC_API_KEY=sk-ant-your-api-key
 ```
 
 4. Set up the database:
 
-Create the following tables in your Supabase project:
+Run the complete schema from `supabase-schema.sql` in your Supabase SQL Editor.
 
-```sql
--- Create users table
-CREATE TABLE users (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  email TEXT NOT NULL UNIQUE,
-  role TEXT NOT NULL DEFAULT 'editor',
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
+**Quick version:**
+- Go to your Supabase project → SQL Editor
+- Copy contents of `supabase-schema.sql`
+- Run it to create tables and RLS policies
 
--- Create presentations table
-CREATE TABLE presentations (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  title TEXT NOT NULL,
-  client_name TEXT,
-  source_url TEXT NOT NULL,
-  theme TEXT NOT NULL CHECK (theme IN ('executive', 'minimal', 'tech')),
-  slides JSONB NOT NULL,
-  share_token TEXT NOT NULL UNIQUE,
-  created_by UUID REFERENCES users(id),
-  created_at TIMESTAMPTZ DEFAULT NOW(),
-  updated_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- Create indexes for performance
-CREATE INDEX idx_presentations_created_by ON presentations(created_by);
-CREATE INDEX idx_presentations_share_token ON presentations(share_token);
-CREATE INDEX idx_presentations_created_at ON presentations(created_at DESC);
-
--- Enable Row Level Security (optional but recommended)
-ALTER TABLE presentations ENABLE ROW LEVEL SECURITY;
-ALTER TABLE users ENABLE ROW LEVEL SECURITY;
-```
+See `SETUP.md` for detailed step-by-step instructions.
 
 5. Run the development server:
 ```bash
