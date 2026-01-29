@@ -6,7 +6,7 @@ const anthropic = new Anthropic({
 });
 
 /**
- * Generate presentation slides from scraped content using Claude
+ * Generate persuasive sales presentation slides from scraped content using Claude
  */
 export async function generateSlides(
   content: string,
@@ -15,70 +15,116 @@ export async function generateSlides(
   theme: Theme
 ): Promise<Slide[]> {
   const clientText = clientName
-    ? `Client: ${clientName}\nPersonalize ALL content to reference ${clientName} specifically.`
-    : 'Client: None - use generic professional language';
+    ? `Client: ${clientName}\nPersonalize this presentation for ${clientName}. Reference them by name where appropriate.`
+    : 'Client: General audience - make it broadly applicable but still compelling';
 
   const themeAesthetic = {
-    executive: 'sophisticated, professional, corporate',
-    minimal: 'clean, simple, modern minimalist',
-    tech: 'cutting-edge technology, innovative, digital'
+    executive: 'sophisticated, executive-level, corporate boardroom',
+    minimal: 'clean, modern, design-forward',
+    tech: 'cutting-edge, innovative, developer-focused'
   }[theme];
 
-  const prompt = `You are a presentation content strategist. Given this web content, create a 5-slide presentation.
+  const prompt = `You are an expert sales presentation strategist. Your job is to create a PERSUASIVE, COMPELLING sales presentation that convinces people to buy.
 
-Content: ${content}
+SCRAPED CONTENT FROM THEIR WEBSITE:
+${content}
 
+PRESENTATION DETAILS:
 Title: ${title}
 ${clientText}
 Theme: ${theme} (${themeAesthetic})
 
-Generate slides in this exact JSON format (respond with ONLY valid JSON, no markdown code blocks):
+YOUR MISSION:
+Analyze the content and create a 12-15 slide sales presentation that SELLS. This needs to be persuasive enough to close deals.
+
+REQUIRED STRUCTURE (12-15 slides total):
+
+1. TITLE SLIDE
+   - Compelling title that hints at value
+   - Subtitle: ${clientName ? `Prepared for ${clientName}` : 'Premium solution presentation'}
+
+2. THE PROBLEM (2-3 slides)
+   - What pain points does this solve?
+   - What's broken in the current way of doing things?
+   - Why should they care RIGHT NOW?
+   - Use specific, relatable scenarios
+
+3. THE SOLUTION (1 slide)
+   - High-level overview of what this product/service is
+   - The "aha!" moment
+   - Position it as the obvious answer to the problems
+
+4. KEY BENEFITS (3-4 slides)
+   - What transformational outcomes will they get?
+   - Use metrics, percentages, time saved, money saved
+   - Focus on THEIR success, not just features
+   - Make it tangible and specific
+
+5. HOW IT WORKS (2-3 slides)
+   - Credibility through specifics
+   - Show it's real and achievable
+   - Address "how is this different?"
+   - Technical credibility without overwhelming
+
+6. PROOF & RESULTS (1-2 slides)
+   - Social proof, case studies, metrics
+   - "Others are already winning with this"
+   - Numbers that matter (ROI, growth, savings)
+
+7. THE BUSINESS CASE (1 slide)
+   - ROI, cost savings, revenue impact
+   - Why this is a smart business decision
+   - Risk of NOT doing it
+
+8. NEXT STEPS (1 slide)
+   - Clear call to action
+   - What happens next
+   - Remove friction from saying yes
+
+9. CLOSING SLIDE
+   - Thank you
+   - Contact info or next meeting
+
+CRITICAL RULES:
+- Generate 12-15 slides total
+- Each content slide should have 3-4 bullet points (not just 4 - vary it)
+- Bullet points should be BENEFITS-focused, not just features
+- Use specific numbers, metrics, percentages wherever possible
+- Make it persuasive - this is a SALES tool, not an information dump
+- Build a narrative arc from problem → solution → proof → action
+- Use power words: proven, guaranteed, exclusive, breakthrough, revolutionary (when appropriate)
+- Address objections preemptively
+- Create urgency where natural
+
+OUTPUT FORMAT (JSON only, no markdown):
 [
   {
     "type": "title",
-    "title": "[presentation title]",
-    "subtitle": "${clientName ? `Prepared exclusively for ${clientName}` : 'Powered by The Algorithm'}",
-    "image_prompt": "abstract professional background image for ${title}, ${themeAesthetic} aesthetic"
+    "title": "[compelling title]",
+    "subtitle": "[subtitle]",
+    "image_prompt": "professional sales presentation opener, ${themeAesthetic}"
   },
   {
     "type": "content",
     "title": "[section title]",
-    "points": ["point 1", "point 2", "point 3", "point 4"],
-    "image_prompt": "visual representing [topic], clean professional style"
+    "points": ["benefit 1", "benefit 2", "benefit 3"],
+    "image_prompt": "visual representing [concept]"
   },
-  {
-    "type": "content",
-    "title": "[section title]",
-    "points": ["point 1", "point 2", "point 3", "point 4"],
-    "image_prompt": "visual representing [topic], clean professional style"
-  },
-  {
-    "type": "content",
-    "title": "[section title]",
-    "points": ["point 1", "point 2", "point 3", "point 4"],
-    "image_prompt": "visual representing [topic], clean professional style"
-  },
+  ...
   {
     "type": "closing",
-    "title": "Thank You",
-    "subtitle": "${clientName ? `Looking forward to working with ${clientName}` : 'Questions & Discussion'}",
-    "image_prompt": "professional closing slide background, ${themeAesthetic} style"
+    "title": "Let's Move Forward",
+    "subtitle": "${clientName ? `Partnership opportunity for ${clientName}` : 'Ready to discuss next steps'}",
+    "image_prompt": "professional closing slide"
   }
 ]
 
-Rules:
-- Exactly 5 slides (1 title, 3 content, 1 closing)
-${clientName ? `- Personalize ALL content to reference ${clientName}` : '- Use professional, engaging language'}
-- Content slides must have exactly 4 bullet points each
-- Image prompts should match the ${theme} theme aesthetic
-- Be specific and business-focused
-- Make content relevant to the source material
-- Keep bullet points concise (max 10 words each)`;
+RESPOND WITH ONLY VALID JSON. Make this presentation so good it could close a deal.`;
 
   try {
     const message = await anthropic.messages.create({
       model: 'claude-sonnet-4-20250514',
-      max_tokens: 4000,
+      max_tokens: 8000,
       messages: [
         {
           role: 'user',
@@ -93,8 +139,13 @@ ${clientName ? `- Personalize ALL content to reference ${clientName}` : '- Use p
     const slides = JSON.parse(responseText) as Slide[];
 
     // Validate structure
-    if (!Array.isArray(slides) || slides.length !== 5) {
-      throw new Error('Invalid slide structure returned from AI');
+    if (!Array.isArray(slides) || slides.length < 10) {
+      throw new Error('AI returned too few slides. Need 12-15 for effective sales presentation.');
+    }
+
+    if (slides.length > 20) {
+      throw new Error('AI returned too many slides. Trimming to 15.');
+      return slides.slice(0, 15);
     }
 
     return slides;
