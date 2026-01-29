@@ -36,23 +36,33 @@ export default function Home() {
         <p style={{
           fontSize: 'clamp(24px, 3vw, 36px)',
           color: '#a0a0a0',
-          marginBottom: '48px',
+          marginBottom: '24px',
           fontWeight: 500
         }}>
-          AI-Powered Presentation Platform
+          Presentation Platform
         </p>
 
         {/* Description */}
         <p style={{
           fontSize: '18px',
+          color: '#ffffff',
+          marginBottom: '16px',
+          maxWidth: '700px',
+          margin: '0 auto 16px',
+          lineHeight: 1.7
+        }}>
+          Generate professional presentations from any URL in seconds.
+        </p>
+        <p style={{
+          fontSize: '18px',
           color: '#707070',
           marginBottom: '48px',
-          maxWidth: '600px',
+          maxWidth: '700px',
           margin: '0 auto 48px',
-          lineHeight: 1.6
+          lineHeight: 1.7,
+          fontWeight: 500
         }}>
-          Generate beautiful, personalized presentations from any URL.
-          Powered by Claude AI.
+          No PowerPoint. No templates. Just results.
         </p>
 
         {/* CTA Buttons */}
@@ -90,7 +100,7 @@ export default function Home() {
               e.currentTarget.style.boxShadow = 'none';
             }}
           >
-            Go to Dashboard
+            Dashboard
           </Link>
           <Link
             href="/dashboard/new"
@@ -119,7 +129,7 @@ export default function Home() {
               e.currentTarget.style.transform = 'translateY(0)';
             }}
           >
-            Create Presentation
+            Create
           </Link>
         </div>
 
@@ -151,14 +161,14 @@ export default function Home() {
               marginBottom: '12px',
               color: '#ffffff'
             }}>
-              Three Themes
+              Three Professional Themes
             </h3>
             <p style={{
               fontSize: '14px',
               color: '#a0a0a0',
               lineHeight: 1.6
             }}>
-              Executive, Minimal, and Tech themes with stunning animations
+              Executive, Minimal, and Tech aesthetics. Built for boardrooms, not pitch decks.
             </p>
           </div>
 
@@ -183,14 +193,14 @@ export default function Home() {
               marginBottom: '12px',
               color: '#ffffff'
             }}>
-              AI-Powered
+              URL to Slides
             </h3>
             <p style={{
               fontSize: '14px',
               color: '#a0a0a0',
               lineHeight: 1.6
             }}>
-              Claude AI generates coherent, business-focused content
+              Source content from anywhere. Structured automatically. Ready to present.
             </p>
           </div>
 
@@ -215,14 +225,14 @@ export default function Home() {
               marginBottom: '12px',
               color: '#ffffff'
             }}>
-              Easy Sharing
+              Instant Sharing
             </h3>
             <p style={{
               fontSize: '14px',
               color: '#a0a0a0',
               lineHeight: 1.6
             }}>
-              Share presentations with unique public links
+              Unique public links. No login required. Send and present.
             </p>
           </div>
         </div>
@@ -233,7 +243,7 @@ export default function Home() {
           fontSize: '13px',
           color: '#707070'
         }}>
-          Built with Next.js, Supabase, and Anthropic Claude
+          Built by The Algorithm
         </div>
       </div>
     </div>
