@@ -4,7 +4,7 @@ import "../styles/themes.css";
 
 export const metadata: Metadata = {
   title: "Cascade - AI Presentation Platform",
-  description: "Beautiful, personalized presentations generated from any URL",
+  description: "Generate beautiful, AI-powered presentations from any URL",
 };
 
 export default function RootLayout({

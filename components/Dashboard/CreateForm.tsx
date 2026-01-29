@@ -15,13 +15,11 @@ export default function CreateForm() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    setSuccess(false);
 
     try {
       const response = await fetch('/api/presentations/generate', {
@@ -41,12 +39,7 @@ export default function CreateForm() {
         throw new Error(data.error || 'Failed to generate presentation');
       }
 
-      setSuccess(true);
-
-      // Redirect to the presentation view after a brief moment
-      setTimeout(() => {
-        router.push(`/dashboard/${data.presentation.id}`);
-      }, 1500);
+      router.push(`/dashboard/${data.presentation.id}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to generate presentation');
     } finally {
@@ -54,25 +47,36 @@ export default function CreateForm() {
     }
   };
 
-  const isFormValid = formData.source_url && formData.title && formData.theme;
+  const isValid = formData.source_url && formData.title && formData.theme;
 
   return (
     <form onSubmit={handleSubmit}>
       {error && (
-        <div className="bg-red-500/10 border border-red-500 text-red-500 px-5 py-4 rounded-lg text-sm">
+        <div style={{
+          background: 'rgba(239, 68, 68, 0.1)',
+          border: '1px solid rgb(239, 68, 68)',
+          borderRadius: '8px',
+          padding: '16px 20px',
+          marginBottom: '20px',
+          color: 'rgb(239, 68, 68)',
+          fontSize: '14px'
+        }}>
           {error}
         </div>
       )}
 
-      {success && (
-        <div className="bg-[#10b981]/10 border border-[#10b981] text-[#10b981] px-5 py-4 rounded-lg text-sm animate-in fade-in duration-300">
-          Presentation generated successfully! Redirecting...
-        </div>
-      )}
-
-      <div className="space-y-3">
-        <label htmlFor="source_url" className="block text-sm font-medium text-[#a0a0a0] uppercase tracking-wider">
-          Source URL
+      {/* SOURCE URL */}
+      <div style={{ marginBottom: '30px' }}>
+        <label style={{
+          display: 'block',
+          marginBottom: '12px',
+          fontWeight: 500,
+          fontSize: '14px',
+          textTransform: 'uppercase',
+          letterSpacing: '0.5px',
+          color: '#a0a0a0'
+        }}>
+          SOURCE URL
         </label>
         <input
           type="url"
@@ -81,7 +85,6 @@ export default function CreateForm() {
           value={formData.source_url}
           onChange={(e) => setFormData({ ...formData, source_url: e.target.value })}
           placeholder="https://example.com/article"
-          className="w-full px-5 py-4 bg-[#0a0a0a] border border-[#2a2a2a] rounded-lg focus:outline-none focus:border-[#3b82f6] focus:ring-2 focus:ring-[#3b82f6]/20 text-white transition-all"
           disabled={loading}
           style={{
             width: '100%',
@@ -106,9 +109,18 @@ export default function CreateForm() {
         />
       </div>
 
-      <div className="space-y-3">
-        <label htmlFor="title" className="block text-sm font-medium text-[#a0a0a0] uppercase tracking-wider">
-          Presentation Title
+      {/* PRESENTATION TITLE */}
+      <div style={{ marginBottom: '30px' }}>
+        <label style={{
+          display: 'block',
+          marginBottom: '12px',
+          fontWeight: 500,
+          fontSize: '14px',
+          textTransform: 'uppercase',
+          letterSpacing: '0.5px',
+          color: '#a0a0a0'
+        }}>
+          PRESENTATION TITLE
         </label>
         <input
           type="text"
@@ -117,7 +129,6 @@ export default function CreateForm() {
           value={formData.title}
           onChange={(e) => setFormData({ ...formData, title: e.target.value })}
           placeholder="Enter presentation title"
-          className="w-full px-5 py-4 bg-[#0a0a0a] border border-[#2a2a2a] rounded-lg focus:outline-none focus:border-[#3b82f6] focus:ring-2 focus:ring-[#3b82f6]/20 text-white transition-all"
           disabled={loading}
           style={{
             width: '100%',
@@ -142,9 +153,18 @@ export default function CreateForm() {
         />
       </div>
 
-      <div className="space-y-3">
-        <label htmlFor="client_name" className="block text-sm font-medium text-[#a0a0a0] uppercase tracking-wider">
-          Client Name (Optional)
+      {/* CLIENT NAME (OPTIONAL) */}
+      <div style={{ marginBottom: '30px' }}>
+        <label style={{
+          display: 'block',
+          marginBottom: '12px',
+          fontWeight: 500,
+          fontSize: '14px',
+          textTransform: 'uppercase',
+          letterSpacing: '0.5px',
+          color: '#a0a0a0'
+        }}>
+          CLIENT NAME (OPTIONAL)
         </label>
         <input
           type="text"
@@ -152,7 +172,6 @@ export default function CreateForm() {
           value={formData.client_name}
           onChange={(e) => setFormData({ ...formData, client_name: e.target.value })}
           placeholder="e.g., Acme Corporation"
-          className="w-full px-5 py-4 bg-[#0a0a0a] border border-[#2a2a2a] rounded-lg focus:outline-none focus:border-[#3b82f6] focus:ring-2 focus:ring-[#3b82f6]/20 text-white transition-all"
           disabled={loading}
           style={{
             width: '100%',
@@ -177,9 +196,18 @@ export default function CreateForm() {
         />
       </div>
 
-      <div className="space-y-4">
-        <label className="block text-sm font-medium text-[#a0a0a0] uppercase tracking-wider">
-          Select Theme
+      {/* SELECT THEME */}
+      <div style={{ marginBottom: '30px' }}>
+        <label style={{
+          display: 'block',
+          marginBottom: '12px',
+          fontWeight: 500,
+          fontSize: '14px',
+          textTransform: 'uppercase',
+          letterSpacing: '0.5px',
+          color: '#a0a0a0'
+        }}>
+          SELECT THEME
         </label>
         <ThemeSelector
           selected={formData.theme}
@@ -187,39 +215,42 @@ export default function CreateForm() {
         />
       </div>
 
-      <div className="pt-4">
+      {/* SUBMIT BUTTON */}
+      <div style={{ marginTop: '40px' }}>
         <button
           type="submit"
-          disabled={loading || !isFormValid}
-          className="w-full bg-[#3b82f6] hover:bg-[#2563eb] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-4 px-8 rounded-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#3b82f6]/30 uppercase tracking-wider text-sm flex items-center justify-center"
+          disabled={!isValid || loading}
+          style={{
+            padding: '16px 32px',
+            background: isValid && !loading ? '#3b82f6' : '#4a5568',
+            color: 'white',
+            border: 'none',
+            borderRadius: '8px',
+            fontSize: '16px',
+            fontWeight: 600,
+            cursor: isValid && !loading ? 'pointer' : 'not-allowed',
+            transition: 'all 0.3s ease',
+            fontFamily: "'DM Sans', sans-serif",
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px',
+            opacity: isValid && !loading ? 1 : 0.5
+          }}
+          onMouseEnter={(e) => {
+            if (isValid && !loading) {
+              e.currentTarget.style.background = '#2563eb';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(59, 130, 246, 0.3)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (isValid && !loading) {
+              e.currentTarget.style.background = '#3b82f6';
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
+            }
+          }}
         >
-          {loading ? (
-            <>
-              <svg
-                className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                />
-              </svg>
-              Generating...
-            </>
-          ) : (
-            'Generate Presentation'
-          )}
+          {loading ? 'GENERATING...' : 'GENERATE PRESENTATION'}
         </button>
       </div>
     </form>

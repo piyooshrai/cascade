@@ -5,38 +5,90 @@ import PresentationList from '@/components/Dashboard/PresentationList';
 
 export default function DashboardPage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
+    <div style={{
+      minHeight: '100vh',
+      background: '#0a0a0a',
+      fontFamily: "'DM Sans', sans-serif"
+    }}>
       {/* Header */}
-      <header className="border-b border-[#2a2a2a]">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="font-mono text-lg">
-            the<span className="text-[#3b82f6]">Algorithm</span>
-          </Link>
-          <Link
-            href="/"
-            className="text-sm text-gray-400 hover:text-white transition-colors"
-          >
-            ← Back
+      <header style={{ borderBottom: '1px solid #2a2a2a', padding: '30px 0' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 20px' }}>
+          <Link href="/" style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: '24px',
+            fontWeight: 600,
+            letterSpacing: '-0.5px',
+            textDecoration: 'none',
+            color: '#ffffff'
+          }}>
+            the<span style={{ color: '#3b82f6' }}>Algorithm</span>
           </Link>
         </div>
       </header>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="flex items-center justify-between mb-12">
+      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '40px 20px' }}>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          marginBottom: '40px',
+          flexWrap: 'wrap',
+          gap: '20px'
+        }}>
           <div>
-            <h1 className="text-4xl font-bold mb-2">Presentations</h1>
-            <p className="text-gray-500">Manage and share your AI-generated presentations</p>
+            <h1 style={{
+              fontSize: '36px',
+              fontWeight: 700,
+              marginBottom: '8px',
+              color: '#ffffff',
+              letterSpacing: '-0.5px'
+            }}>
+              Dashboard
+            </h1>
+            <p style={{
+              fontSize: '16px',
+              color: '#a0a0a0'
+            }}>
+              Manage your presentations
+            </p>
           </div>
           <Link
             href="/dashboard/new"
-            className="bg-[#3b82f6] hover:bg-[#2563eb] text-white px-6 py-3 rounded font-medium transition-colors"
+            style={{
+              padding: '14px 28px',
+              background: '#3b82f6',
+              color: 'white',
+              textDecoration: 'none',
+              borderRadius: '8px',
+              fontSize: '15px',
+              fontWeight: 600,
+              transition: 'all 0.3s ease',
+              display: 'inline-block',
+              textTransform: 'uppercase',
+              letterSpacing: '0.5px'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#2563eb';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(59, 130, 246, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#3b82f6';
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
           >
-            Create New
+            + Create New
           </Link>
         </div>
 
-        <div className="border border-[#2a2a2a] bg-[#0a0a0a]">
+        <div style={{
+          background: '#141414',
+          borderRadius: '12px',
+          border: '1px solid #2a2a2a',
+          overflow: 'hidden'
+        }}>
           <PresentationList />
         </div>
       </div>
