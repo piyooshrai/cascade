@@ -2,58 +2,116 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center">
-      <div className="max-w-4xl mx-auto px-4 text-center">
-        <h1 className="text-7xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-          Cascade
-        </h1>
-        <p className="text-2xl md:text-3xl text-gray-400 mb-12">
-          AI-Powered Presentation Platform
-        </p>
-        <p className="text-xl text-gray-500 mb-12 max-w-2xl mx-auto">
-          Generate beautiful, personalized presentations from any URL.
-          Powered by Claude AI.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+    <div className="min-h-screen bg-[#0a0a0a] text-white">
+      {/* Header */}
+      <header className="border-b border-[#2a2a2a]">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="font-mono text-lg">
+            the<span className="text-[#3b82f6]">Algorithm</span>
+          </div>
           <Link
             href="/dashboard"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-lg transition-colors text-lg"
+            className="text-sm text-gray-400 hover:text-white transition-colors"
           >
-            Go to Dashboard
-          </Link>
-          <Link
-            href="/dashboard/new"
-            className="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-4 px-8 rounded-lg transition-colors text-lg border border-gray-700"
-          >
-            Create Presentation
+            Dashboard →
           </Link>
         </div>
+      </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-          <div className="bg-gray-950 border border-gray-800 rounded-xl p-6">
-            <div className="text-4xl mb-4">🎨</div>
-            <h3 className="text-xl font-semibold mb-2">Three Themes</h3>
-            <p className="text-gray-500">Executive, Minimal, and Tech themes with stunning animations</p>
-          </div>
+      {/* Hero Section */}
+      <main className="max-w-7xl mx-auto px-6">
+        <div className="py-32 text-center">
+          <h1 className="text-8xl font-bold mb-8 tracking-tight">
+            Cascade
+          </h1>
+          <p className="text-2xl text-gray-400 mb-4 font-light">
+            AI-Powered Presentation Platform
+          </p>
+          <p className="text-base text-gray-500 max-w-2xl mx-auto mb-12">
+            Generate professional presentations from any URL using Claude AI.
+            Structured content, personalized messaging, three distinctive themes.
+          </p>
 
-          <div className="bg-gray-950 border border-gray-800 rounded-xl p-6">
-            <div className="text-4xl mb-4">🤖</div>
-            <h3 className="text-xl font-semibold mb-2">AI-Powered</h3>
-            <p className="text-gray-500">Claude AI generates coherent, business-focused content</p>
-          </div>
-
-          <div className="bg-gray-950 border border-gray-800 rounded-xl p-6">
-            <div className="text-4xl mb-4">🔗</div>
-            <h3 className="text-xl font-semibold mb-2">Easy Sharing</h3>
-            <p className="text-gray-500">Share presentations with unique public links</p>
+          <div className="flex gap-4 justify-center mb-32">
+            <Link
+              href="/dashboard/new"
+              className="bg-[#3b82f6] hover:bg-[#2563eb] text-white px-8 py-3 rounded font-medium transition-colors"
+            >
+              Create Presentation
+            </Link>
+            <Link
+              href="/dashboard"
+              className="bg-[#141414] hover:bg-[#1f1f1f] text-white px-8 py-3 rounded border border-[#2a2a2a] font-medium transition-colors"
+            >
+              View Dashboard
+            </Link>
           </div>
         </div>
 
-        <div className="mt-16 text-sm text-gray-600">
-          Built with Next.js, Supabase, and Anthropic Claude
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-3 gap-px bg-[#2a2a2a] border border-[#2a2a2a] mb-32">
+          <div className="bg-[#0a0a0a] p-12">
+            <div className="text-sm text-gray-500 uppercase tracking-wider mb-4 font-mono">
+              01
+            </div>
+            <h3 className="text-xl font-semibold mb-4">
+              Three Professional Themes
+            </h3>
+            <p className="text-gray-400 leading-relaxed">
+              Executive, Minimal, and Tech themes with sophisticated animations
+              and precise typography. Each theme tailored for different presentation contexts.
+            </p>
+          </div>
+
+          <div className="bg-[#0a0a0a] p-12">
+            <div className="text-sm text-gray-500 uppercase tracking-wider mb-4 font-mono">
+              02
+            </div>
+            <h3 className="text-xl font-semibold mb-4">
+              AI Content Structuring
+            </h3>
+            <p className="text-gray-400 leading-relaxed">
+              Claude AI analyzes source content and generates coherent,
+              business-focused slides. Automatic personalization for client-specific messaging.
+            </p>
+          </div>
+
+          <div className="bg-[#0a0a0a] p-12">
+            <div className="text-sm text-gray-500 uppercase tracking-wider mb-4 font-mono">
+              03
+            </div>
+            <h3 className="text-xl font-semibold mb-4">
+              Instant Sharing
+            </h3>
+            <p className="text-gray-400 leading-relaxed">
+              Share presentations via unique public links. No authentication required
+              for viewers. Full keyboard navigation and presentation controls.
+            </p>
+          </div>
         </div>
-      </div>
+
+        {/* Tech Stack */}
+        <div className="border-t border-[#2a2a2a] py-12 mb-12">
+          <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-500 font-mono">
+            <span>Next.js 14+</span>
+            <span className="text-gray-700">•</span>
+            <span>Supabase</span>
+            <span className="text-gray-700">•</span>
+            <span>Claude API</span>
+            <span className="text-gray-700">•</span>
+            <span>TypeScript</span>
+            <span className="text-gray-700">•</span>
+            <span>Tailwind CSS</span>
+          </div>
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="border-t border-[#2a2a2a] py-8">
+        <div className="max-w-7xl mx-auto px-6 text-center text-sm text-gray-600">
+          Built by The Algorithm
+        </div>
+      </footer>
     </div>
   );
 }
