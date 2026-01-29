@@ -57,7 +57,7 @@ export default function CreateForm() {
   const isFormValid = formData.source_url && formData.title && formData.theme;
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
+    <form onSubmit={handleSubmit}>
       {error && (
         <div className="bg-red-500/10 border border-red-500 text-red-500 px-5 py-4 rounded-lg text-sm">
           {error}
@@ -76,13 +76,33 @@ export default function CreateForm() {
         </label>
         <input
           type="url"
-          id="source_url"
+          id="sourceUrl"
           required
           value={formData.source_url}
           onChange={(e) => setFormData({ ...formData, source_url: e.target.value })}
           placeholder="https://example.com/article"
           className="w-full px-5 py-4 bg-[#0a0a0a] border border-[#2a2a2a] rounded-lg focus:outline-none focus:border-[#3b82f6] focus:ring-2 focus:ring-[#3b82f6]/20 text-white transition-all"
           disabled={loading}
+          style={{
+            width: '100%',
+            padding: '16px 20px',
+            background: '#0a0a0a',
+            border: '1px solid #2a2a2a',
+            borderRadius: '8px',
+            color: '#ffffff',
+            fontSize: '16px',
+            fontFamily: "'DM Sans', sans-serif",
+            transition: 'all 0.3s ease',
+            outline: 'none'
+          }}
+          onFocus={(e) => {
+            e.target.style.borderColor = '#3b82f6';
+            e.target.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.1)';
+          }}
+          onBlur={(e) => {
+            e.target.style.borderColor = '#2a2a2a';
+            e.target.style.boxShadow = 'none';
+          }}
         />
       </div>
 
@@ -92,13 +112,33 @@ export default function CreateForm() {
         </label>
         <input
           type="text"
-          id="title"
+          id="presentationTitle"
           required
           value={formData.title}
           onChange={(e) => setFormData({ ...formData, title: e.target.value })}
           placeholder="Enter presentation title"
           className="w-full px-5 py-4 bg-[#0a0a0a] border border-[#2a2a2a] rounded-lg focus:outline-none focus:border-[#3b82f6] focus:ring-2 focus:ring-[#3b82f6]/20 text-white transition-all"
           disabled={loading}
+          style={{
+            width: '100%',
+            padding: '16px 20px',
+            background: '#0a0a0a',
+            border: '1px solid #2a2a2a',
+            borderRadius: '8px',
+            color: '#ffffff',
+            fontSize: '16px',
+            fontFamily: "'DM Sans', sans-serif",
+            transition: 'all 0.3s ease',
+            outline: 'none'
+          }}
+          onFocus={(e) => {
+            e.target.style.borderColor = '#3b82f6';
+            e.target.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.1)';
+          }}
+          onBlur={(e) => {
+            e.target.style.borderColor = '#2a2a2a';
+            e.target.style.boxShadow = 'none';
+          }}
         />
       </div>
 
@@ -108,12 +148,32 @@ export default function CreateForm() {
         </label>
         <input
           type="text"
-          id="client_name"
+          id="clientName"
           value={formData.client_name}
           onChange={(e) => setFormData({ ...formData, client_name: e.target.value })}
           placeholder="e.g., Acme Corporation"
           className="w-full px-5 py-4 bg-[#0a0a0a] border border-[#2a2a2a] rounded-lg focus:outline-none focus:border-[#3b82f6] focus:ring-2 focus:ring-[#3b82f6]/20 text-white transition-all"
           disabled={loading}
+          style={{
+            width: '100%',
+            padding: '16px 20px',
+            background: '#0a0a0a',
+            border: '1px solid #2a2a2a',
+            borderRadius: '8px',
+            color: '#ffffff',
+            fontSize: '16px',
+            fontFamily: "'DM Sans', sans-serif",
+            transition: 'all 0.3s ease',
+            outline: 'none'
+          }}
+          onFocus={(e) => {
+            e.target.style.borderColor = '#3b82f6';
+            e.target.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.1)';
+          }}
+          onBlur={(e) => {
+            e.target.style.borderColor = '#2a2a2a';
+            e.target.style.boxShadow = 'none';
+          }}
         />
       </div>
 
