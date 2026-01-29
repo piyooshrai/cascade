@@ -57,9 +57,9 @@ export default function PresentationViewer({
   const themeClass = `theme-${presentation.theme}`;
 
   return (
-    <div className={`w-full h-screen ${themeClass} relative overflow-hidden`}>
+    <div className={`presentation-viewer ${themeClass}`}>
       {/* Slide Content */}
-      <div className="w-full h-full" key={currentSlide}>
+      <div className="presentation-slide" key={currentSlide}>
         <SlideRenderer
           slide={presentation.slides[currentSlide]}
           theme={presentation.theme}
@@ -88,16 +88,16 @@ export default function PresentationViewer({
       )}
 
       {/* Click Areas for Navigation */}
-      <div className="absolute inset-0 flex pointer-events-none">
+      <div className="presentation-nav-areas">
         <button
           onClick={goToPreviousSlide}
-          className="flex-1 pointer-events-auto cursor-pointer opacity-0 hover:opacity-10 transition-opacity"
+          className="presentation-nav-prev"
           aria-label="Previous slide"
           disabled={currentSlide === 0}
         />
         <button
           onClick={goToNextSlide}
-          className="flex-1 pointer-events-auto cursor-pointer opacity-0 hover:opacity-10 transition-opacity"
+          className="presentation-nav-next"
           aria-label="Next slide"
           disabled={currentSlide === totalSlides - 1}
         />
