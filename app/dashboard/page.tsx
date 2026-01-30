@@ -12,14 +12,14 @@ export default function DashboardPage() {
       fontFamily: "'DM Sans', sans-serif"
     }}>
       {/* Header */}
-      <header style={{ borderBottom: '1px solid #2a2a2a', padding: '16px 0' }}>
+      <header style={{ borderBottom: '1px solid #2a2a2a', padding: '12px 0' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 20px' }}>
-          <Link href="/" style={{ display: 'inline-block' }}>
+          <Link href="/" style={{ display: 'inline-block', lineHeight: 0 }}>
             <Image
               src="/logo.png"
               alt="Cascade"
-              width={160}
-              height={40}
+              width={140}
+              height={35}
               style={{ display: 'block' }}
             />
           </Link>

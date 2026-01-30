@@ -20,12 +20,12 @@ export default function Home() {
         textAlign: 'center'
       }}>
         {/* Main Heading */}
-        <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'center' }}>
+        <div style={{ marginBottom: '16px', display: 'flex', justifyContent: 'center' }}>
           <Image
             src="/logo.png"
             alt="Cascade"
-            width={360}
-            height={90}
+            width={320}
+            height={80}
             priority
           />
         </div>
