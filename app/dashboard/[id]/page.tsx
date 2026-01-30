@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import PresentationViewer from '@/components/PresentationViewer';
@@ -13,10 +13,59 @@ export default function PresentationDetailPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [copiedLink, setCopiedLink] = useState(false);
+  const [presentationMode, setPresentationMode] = useState(false);
+  const [showControls, setShowControls] = useState(true);
+  const hideControlsTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     fetchPresentation();
   }, [params.id]);
+
+  // Keyboard shortcuts for presentation mode
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        setPresentationMode(prev => !prev);
+      }
+      if (e.key === 'Escape' && presentationMode) {
+        setPresentationMode(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [presentationMode]);
+
+  // Auto-hide controls in presentation mode
+  useEffect(() => {
+    if (!presentationMode) {
+      setShowControls(true);
+      return;
+    }
+
+    const handleMouseMove = () => {
+      setShowControls(true);
+
+      if (hideControlsTimeout.current) {
+        clearTimeout(hideControlsTimeout.current);
+      }
+
+      hideControlsTimeout.current = setTimeout(() => {
+        setShowControls(false);
+      }, 2000);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    handleMouseMove();
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (hideControlsTimeout.current) {
+        clearTimeout(hideControlsTimeout.current);
+      }
+    };
+  }, [presentationMode]);
 
   const fetchPresentation = async () => {
     try {
@@ -91,88 +140,119 @@ export default function PresentationDetailPage() {
   return (
     <div style={{ minHeight: '100vh', background: '#0a0a0a', position: 'relative' }}>
       {/* Header Controls */}
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 100,
-        padding: '20px 40px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-      }}>
-        <Link
-          href="/dashboard"
-          style={{
-            color: '#a0a0a0',
-            textDecoration: 'none',
-            fontSize: '14px',
-            fontWeight: 500,
-            transition: 'color 0.2s'
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.color = '#ffffff'}
-          onMouseLeave={(e) => e.currentTarget.style.color = '#a0a0a0'}
-        >
-          ← Dashboard
-        </Link>
+      {(!presentationMode || showControls) && (
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 100,
+          padding: '20px 40px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          opacity: presentationMode && !showControls ? 0 : 1,
+          transition: 'opacity 0.3s ease'
+        }}>
+          <Link
+            href="/dashboard"
+            style={{
+              color: '#a0a0a0',
+              textDecoration: 'none',
+              fontSize: '14px',
+              fontWeight: 500,
+              transition: 'color 0.2s'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.color = '#ffffff'}
+            onMouseLeave={(e) => e.currentTarget.style.color = '#a0a0a0'}
+          >
+            ← Dashboard
+          </Link>
 
-        <div style={{ display: 'flex', gap: '12px' }}>
-          <button
-            onClick={copyShareLink}
-            style={{
-              background: '#10b981',
-              color: '#ffffff',
-              border: 'none',
-              padding: '8px 16px',
-              borderRadius: '6px',
-              fontSize: '13px',
-              fontWeight: 600,
-              cursor: 'pointer',
-              transition: 'all 0.2s',
-              textTransform: 'none'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = '#059669';
-              e.currentTarget.style.transform = 'translateY(-1px)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = '#10b981';
-              e.currentTarget.style.transform = 'translateY(0)';
-            }}
-          >
-            {copiedLink ? 'Link Copied!' : 'Copy Share Link'}
-          </button>
-          <button
-            onClick={handleDelete}
-            style={{
-              background: '#ef4444',
-              color: '#ffffff',
-              border: 'none',
-              padding: '8px 16px',
-              borderRadius: '6px',
-              fontSize: '13px',
-              fontWeight: 600,
-              cursor: 'pointer',
-              transition: 'all 0.2s',
-              textTransform: 'none'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = '#dc2626';
-              e.currentTarget.style.transform = 'translateY(-1px)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = '#ef4444';
-              e.currentTarget.style.transform = 'translateY(0)';
-            }}
-          >
-            Delete
-          </button>
+          <div style={{ display: 'flex', gap: '12px' }}>
+            <button
+              onClick={() => setPresentationMode(prev => !prev)}
+              style={{
+                background: presentationMode ? '#3b82f6' : '#1a1a1a',
+                color: '#ffffff',
+                border: '1px solid ' + (presentationMode ? '#3b82f6' : '#2a2a2a'),
+                padding: '8px 16px',
+                borderRadius: '6px',
+                fontSize: '13px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                textTransform: 'none'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-1px)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
+              title="Press F to toggle presentation mode"
+            >
+              {presentationMode ? '◻ Exit Presentation (F)' : '▶ Present (F)'}
+            </button>
+            <button
+              onClick={copyShareLink}
+              style={{
+                background: '#10b981',
+                color: '#ffffff',
+                border: 'none',
+                padding: '8px 16px',
+                borderRadius: '6px',
+                fontSize: '13px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                textTransform: 'none'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = '#059669';
+                e.currentTarget.style.transform = 'translateY(-1px)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = '#10b981';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
+            >
+              {copiedLink ? 'Link Copied!' : 'Copy Share Link'}
+            </button>
+            <button
+              onClick={handleDelete}
+              style={{
+                background: '#ef4444',
+                color: '#ffffff',
+                border: 'none',
+                padding: '8px 16px',
+                borderRadius: '6px',
+                fontSize: '13px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                textTransform: 'none'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = '#dc2626';
+                e.currentTarget.style.transform = 'translateY(-1px)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = '#ef4444';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
+            >
+              Delete
+            </button>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Presentation Viewer */}
-      <PresentationViewer presentation={presentation} />
+      <PresentationViewer
+        presentation={presentation}
+        showControls={!presentationMode || showControls}
+      />
     </div>
   );
 }
