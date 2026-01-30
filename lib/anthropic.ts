@@ -1,5 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk';
 import type { Slide, Theme } from './types';
+import { fetchMultipleUnsplashImages } from './unsplash';
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY!
@@ -136,7 +137,7 @@ RESPOND WITH ONLY VALID JSON. Make this presentation so good it could close a de
     const responseText = message.content[0].type === 'text' ? message.content[0].text : '';
 
     // Parse JSON response
-    const slides = JSON.parse(responseText) as Slide[];
+    let slides = JSON.parse(responseText) as Slide[];
 
     // Validate structure
     if (!Array.isArray(slides) || slides.length < 10) {
@@ -144,9 +145,21 @@ RESPOND WITH ONLY VALID JSON. Make this presentation so good it could close a de
     }
 
     if (slides.length > 20) {
-      throw new Error('AI returned too many slides. Trimming to 15.');
-      return slides.slice(0, 15);
+      console.warn('AI returned too many slides. Trimming to 15.');
+      slides = slides.slice(0, 15);
     }
+
+    // Fetch Unsplash images for all slides in parallel
+    console.log('Fetching images from Unsplash...');
+    const imageQueries = slides.map(slide => slide.image_prompt || slide.title);
+    const imageUrls = await fetchMultipleUnsplashImages(imageQueries);
+
+    // Attach image URLs to slides
+    slides.forEach((slide, index) => {
+      if (imageUrls[index]) {
+        slide.image_url = imageUrls[index];
+      }
+    });
 
     return slides;
   } catch (error) {

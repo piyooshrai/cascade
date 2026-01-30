@@ -22,6 +22,13 @@ export default function SlideRenderer({ slide, theme }: SlideRendererProps) {
             </p>
           )}
         </div>
+        {slide.image_url && (
+          <img 
+            src={slide.image_url} 
+            alt={slide.title}
+            className="slide-image"
+          />
+        )}
       </div>
     );
   }
