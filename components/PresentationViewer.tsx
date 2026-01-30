@@ -64,21 +64,21 @@ export default function PresentationViewer({
           slide={presentation.slides[currentSlide]}
           theme={presentation.theme}
         />
+
+        {/* Client Badge - inside slide content area */}
+        {presentation.client_name && showControls && (
+          <div className="client-badge">
+            FOR {presentation.client_name.toUpperCase()}
+          </div>
+        )}
+
+        {/* Slide Counter - inside slide content area */}
+        {showControls && (
+          <div className="slide-counter">
+            {currentSlide + 1} / {totalSlides}
+          </div>
+        )}
       </div>
-
-      {/* Client Badge */}
-      {presentation.client_name && showControls && (
-        <div className="client-badge">
-          FOR {presentation.client_name.toUpperCase()}
-        </div>
-      )}
-
-      {/* Slide Counter */}
-      {showControls && (
-        <div className="slide-counter">
-          {currentSlide + 1} / {totalSlides}
-        </div>
-      )}
 
       {/* Navigation Hint */}
       {showControls && currentSlide === 0 && (

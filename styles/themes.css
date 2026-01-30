@@ -265,7 +265,7 @@
   height: 100%;
   width: 100%;
   position: relative;
-  padding: 3rem 4rem;
+  padding: 4rem 4rem 2.5rem 4rem;
 }
 
 .slide-content-wrapper {
@@ -453,7 +453,7 @@
   grid-template-columns: 1fr 1fr !important;
   gap: 60px !important;
   align-items: center !important;
-  padding: 60px 80px !important;
+  padding: 60px 80px 40px 80px !important;
   height: 100% !important;
 }
 
@@ -550,14 +550,14 @@
   height: 100%;
   width: 100%;
   position: relative;
-  padding: 60px 80px;
+  padding: 60px 80px 40px 80px;
   text-align: center;
 }
 
 .slide-title-stat {
   font-size: 2.5rem;
   font-weight: 600;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   opacity: 0.9;
   animation: slideUpFade 0.8s ease-out;
 }
@@ -615,13 +615,13 @@
   height: 100%;
   width: 100%;
   position: relative;
-  padding: 60px 100px;
+  padding: 60px 100px 40px 100px;
 }
 
 .slide-title-quote {
   font-size: 2rem;
   font-weight: 600;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   opacity: 0.8;
   text-align: center;
   animation: slideUpFade 0.8s ease-out;
@@ -674,7 +674,7 @@
   height: 100%;
   width: 100%;
   position: relative;
-  padding: 60px 120px;
+  padding: 60px 120px 40px 120px;
   text-align: center;
 }
 
@@ -712,13 +712,13 @@
   height: 100%;
   width: 100%;
   position: relative;
-  padding: 60px 80px;
+  padding: 50px 80px 40px 80px;
 }
 
 .slide-title-comparison {
   font-size: 2.5rem;
   font-weight: 600;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   text-align: center;
   animation: slideUpFade 0.8s ease-out;
 }
@@ -728,20 +728,20 @@
   grid-template-columns: 1fr auto 1fr;
   gap: 40px;
   flex: 1;
-  align-items: center;
+  align-items: start;
   animation: slideUpFade 1s ease-out 0.2s backwards;
 }
 
 .comparison-column {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .comparison-label {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -808,13 +808,13 @@
   height: 100%;
   width: 100%;
   position: relative;
-  padding: 60px 80px;
+  padding: 60px 80px 40px 80px;
 }
 
 .slide-title-timeline {
   font-size: 2.5rem;
   font-weight: 600;
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
   text-align: center;
   animation: slideUpFade 0.8s ease-out;
 }
