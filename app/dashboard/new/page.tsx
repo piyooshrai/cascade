@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import CreateForm from '@/components/Dashboard/CreateForm';
 
 export default function NewPresentationPage() {
@@ -7,15 +8,14 @@ export default function NewPresentationPage() {
       {/* Header */}
       <header style={{ borderBottom: '1px solid #2a2a2a', padding: '30px 0', marginBottom: '60px' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 20px' }}>
-          <Link href="/" style={{
-            fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: '24px',
-            fontWeight: 600,
-            letterSpacing: '-0.5px',
-            textDecoration: 'none',
-            color: '#ffffff'
-          }}>
-            the<span style={{ color: '#3b82f6' }}>Algorithm</span>
+          <Link href="/" style={{ display: 'inline-block' }}>
+            <Image
+              src="/logo.png"
+              alt="Cascade"
+              width={180}
+              height={45}
+              style={{ display: 'block' }}
+            />
           </Link>
         </div>
       </header>
