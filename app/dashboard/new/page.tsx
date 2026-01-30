@@ -6,14 +6,14 @@ export default function NewPresentationPage() {
   return (
     <div className="min-h-screen" style={{ background: '#0a0a0a' }}>
       {/* Header */}
-      <header style={{ borderBottom: '1px solid #2a2a2a', padding: '12px 0', marginBottom: '60px' }}>
+      <header style={{ borderBottom: '1px solid #2a2a2a', padding: '6px 0', marginBottom: '60px' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 20px' }}>
           <Link href="/" style={{ display: 'inline-block', lineHeight: 0 }}>
             <Image
               src="/logo.png"
               alt="Cascade"
-              width={140}
-              height={35}
+              width={120}
+              height={30}
               style={{ display: 'block' }}
             />
           </Link>
