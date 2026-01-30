@@ -78,7 +78,10 @@ export default function CreateForm() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to generate presentation');
+        const errorMessage = data.suggestion
+          ? `${data.error}. ${data.suggestion}`
+          : data.error || 'Failed to generate presentation';
+        throw new Error(errorMessage);
       }
 
       router.push(`/dashboard/${data.presentation.id}`);

@@ -27,7 +27,20 @@ export async function POST(request: NextRequest) {
 
     // Step 1: Scrape URL content
     console.log(`Scraping URL: ${source_url}`);
-    const scrapedContent = await scrapeURL(source_url);
+    let scrapedContent;
+    try {
+      scrapedContent = await scrapeURL(source_url);
+    } catch (scrapeError) {
+      console.error('Scraping failed:', scrapeError);
+      return NextResponse.json(
+        {
+          error: 'Unable to access the provided URL',
+          details: scrapeError instanceof Error ? scrapeError.message : 'Failed to fetch content from URL',
+          suggestion: 'The website may be blocking automated access. Try a different URL or check if the site is publicly accessible.'
+        },
+        { status: 400 }
+      );
+    }
 
     // Step 2: Generate slides with AI
     console.log(`Generating slides with AI for theme: ${theme}...`);
