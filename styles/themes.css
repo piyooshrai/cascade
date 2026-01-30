@@ -265,7 +265,7 @@
   height: 100%;
   width: 100%;
   position: relative;
-  padding: 5rem 4rem 3rem 4rem;
+  padding: 4rem 4rem 2.5rem 4rem;
 }
 
 .slide-content-wrapper {
@@ -453,7 +453,7 @@
   grid-template-columns: 1fr 1fr !important;
   gap: 60px !important;
   align-items: center !important;
-  padding: 80px 80px 60px 80px !important;
+  padding: 60px 80px 40px 80px !important;
   height: 100% !important;
 }
 
@@ -550,14 +550,14 @@
   height: 100%;
   width: 100%;
   position: relative;
-  padding: 80px 80px 60px 80px;
+  padding: 60px 80px 40px 80px;
   text-align: center;
 }
 
 .slide-title-stat {
   font-size: 2.5rem;
   font-weight: 600;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   opacity: 0.9;
   animation: slideUpFade 0.8s ease-out;
 }
@@ -615,13 +615,13 @@
   height: 100%;
   width: 100%;
   position: relative;
-  padding: 80px 100px 60px 100px;
+  padding: 60px 100px 40px 100px;
 }
 
 .slide-title-quote {
   font-size: 2rem;
   font-weight: 600;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   opacity: 0.8;
   text-align: center;
   animation: slideUpFade 0.8s ease-out;
@@ -674,7 +674,7 @@
   height: 100%;
   width: 100%;
   position: relative;
-  padding: 80px 120px 60px 120px;
+  padding: 60px 120px 40px 120px;
   text-align: center;
 }
 
@@ -808,13 +808,13 @@
   height: 100%;
   width: 100%;
   position: relative;
-  padding: 80px 80px 60px 80px;
+  padding: 60px 80px 40px 80px;
 }
 
 .slide-title-timeline {
   font-size: 2.5rem;
   font-weight: 600;
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
   text-align: center;
   animation: slideUpFade 0.8s ease-out;
 }
