@@ -138,21 +138,21 @@ export default function PresentationDetailPage() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#0a0a0a', position: 'relative' }}>
+    <div style={{
+      minHeight: '100vh',
+      background: '#0a0a0a',
+      display: 'flex',
+      flexDirection: 'column'
+    }}>
       {/* Header Controls */}
-      {(!presentationMode || showControls) && (
+      {!presentationMode && (
         <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 100,
           padding: '20px 40px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          opacity: presentationMode && !showControls ? 0 : 1,
-          transition: 'opacity 0.3s ease'
+          background: '#0a0a0a',
+          borderBottom: '1px solid #1a1a1a'
         }}>
           <Link
             href="/dashboard"
@@ -171,11 +171,11 @@ export default function PresentationDetailPage() {
 
           <div style={{ display: 'flex', gap: '12px' }}>
             <button
-              onClick={() => setPresentationMode(prev => !prev)}
+              onClick={() => setPresentationMode(true)}
               style={{
-                background: presentationMode ? '#3b82f6' : '#1a1a1a',
+                background: '#1a1a1a',
                 color: '#ffffff',
-                border: '1px solid ' + (presentationMode ? '#3b82f6' : '#2a2a2a'),
+                border: '1px solid #2a2a2a',
                 padding: '8px 16px',
                 borderRadius: '6px',
                 fontSize: '13px',
@@ -192,7 +192,7 @@ export default function PresentationDetailPage() {
               }}
               title="Press F to toggle presentation mode"
             >
-              {presentationMode ? '◻ Exit Presentation (F)' : '▶ Present (F)'}
+              ▶ Present (F)
             </button>
             <button
               onClick={copyShareLink}
@@ -248,11 +248,72 @@ export default function PresentationDetailPage() {
         </div>
       )}
 
+      {/* Presentation Mode Overlay Controls */}
+      {presentationMode && showControls && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 100,
+          padding: '20px 40px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          background: 'linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0) 100%)',
+          opacity: showControls ? 1 : 0,
+          transition: 'opacity 0.3s ease',
+          pointerEvents: showControls ? 'auto' : 'none'
+        }}>
+          <Link
+            href="/dashboard"
+            style={{
+              color: '#a0a0a0',
+              textDecoration: 'none',
+              fontSize: '14px',
+              fontWeight: 500,
+              transition: 'color 0.2s'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.color = '#ffffff'}
+            onMouseLeave={(e) => e.currentTarget.style.color = '#a0a0a0'}
+          >
+            ← Dashboard
+          </Link>
+
+          <button
+            onClick={() => setPresentationMode(false)}
+            style={{
+              background: '#3b82f6',
+              color: '#ffffff',
+              border: '1px solid #3b82f6',
+              padding: '8px 16px',
+              borderRadius: '6px',
+              fontSize: '13px',
+              fontWeight: 600,
+              cursor: 'pointer',
+              transition: 'all 0.2s',
+              textTransform: 'none'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-1px)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+            }}
+            title="Press ESC or F to exit presentation mode"
+          >
+            ◻ Exit Presentation (ESC)
+          </button>
+        </div>
+      )}
+
       {/* Presentation Viewer */}
-      <PresentationViewer
-        presentation={presentation}
-        showControls={!presentationMode || showControls}
-      />
+      <div style={{ flex: 1, display: 'flex' }}>
+        <PresentationViewer
+          presentation={presentation}
+          showControls={!presentationMode || showControls}
+        />
+      </div>
     </div>
   );
 }

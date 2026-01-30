@@ -96,6 +96,28 @@ CRITICAL RULES:
 - Use power words: proven, guaranteed, exclusive, breakthrough, revolutionary (when appropriate)
 - Address objections preemptively
 - Create urgency where natural
+- VARY THE VISUAL PACING - use different layouts to avoid monotony
+- Break patterns every 3-4 slides with a visual change
+
+AVAILABLE SLIDE LAYOUTS:
+1. "default" - Standard title + bullet points (use for most content slides)
+2. "stat_callout" - Large number/statistic with context (use for key metrics, ROI, impressive numbers)
+3. "quote" - Customer testimonial or powerful quote (use for social proof, authority)
+4. "image_full" - Full-bleed image with minimal overlay text (use for emotional impact, scene-setting)
+5. "comparison" - Two-column before/after or us vs them (use for differentiation, transformation)
+6. "timeline" - Horizontal steps/progression (use for implementation process, roadmap)
+7. "statement" - Single powerful sentence, minimal text (use for key insights, turning points)
+
+LAYOUT SELECTION STRATEGY:
+- Start with title slide
+- Use DEFAULT for most problem/solution/benefit slides
+- Insert a STAT_CALLOUT when you have a compelling metric (e.g., "47% cost reduction", "3x faster")
+- Use QUOTE for social proof sections (customer testimonials, industry recognition)
+- Use COMPARISON for differentiation (before/after, us vs competitors)
+- Use TIMELINE for the "How It Works" section
+- Use STATEMENT for pivotal moments ("The old way is broken" or "Time to act")
+- Use IMAGE_FULL sparingly for emotional impact or scene-setting
+- Vary pacing: 3-4 dense slides → 1 minimal slide → repeat
 
 OUTPUT FORMAT (JSON only, no markdown):
 [
@@ -107,9 +129,83 @@ OUTPUT FORMAT (JSON only, no markdown):
   },
   {
     "type": "content",
+    "layout": "default",
     "title": "[section title]",
     "points": ["benefit 1", "benefit 2", "benefit 3"],
     "image_prompt": "visual representing [concept]"
+  },
+  {
+    "type": "content",
+    "layout": "stat_callout",
+    "title": "Proven Results",
+    "stat": {
+      "value": "47%",
+      "label": "Average Cost Reduction",
+      "context": "Clients see ROI within 90 days"
+    },
+    "image_prompt": "growth chart, success metrics"
+  },
+  {
+    "type": "content",
+    "layout": "quote",
+    "title": "What Our Clients Say",
+    "quote": {
+      "text": "This solution transformed our operations and saved us millions.",
+      "author": "Jane Smith",
+      "role": "CFO, Fortune 500 Company"
+    },
+    "image_prompt": "professional testimonial"
+  },
+  {
+    "type": "content",
+    "layout": "comparison",
+    "title": "The Transformation",
+    "comparison": {
+      "left": {
+        "label": "Before",
+        "items": ["Manual processes", "High error rates", "Slow response times"]
+      },
+      "right": {
+        "label": "After",
+        "items": ["Automated workflows", "99.9% accuracy", "Real-time insights"]
+      }
+    },
+    "image_prompt": "transformation, before and after"
+  },
+  {
+    "type": "content",
+    "layout": "timeline",
+    "title": "Implementation Roadmap",
+    "timeline": {
+      "steps": [
+        {
+          "label": "Discovery",
+          "description": "Analyze your current state",
+          "duration": "Week 1"
+        },
+        {
+          "label": "Setup",
+          "description": "Configure and customize",
+          "duration": "Week 2-3"
+        },
+        {
+          "label": "Launch",
+          "description": "Go live with support",
+          "duration": "Week 4"
+        }
+      ]
+    },
+    "image_prompt": "roadmap, timeline, process"
+  },
+  {
+    "type": "content",
+    "layout": "statement",
+    "title": "The Time to Act Is Now",
+    "statement": {
+      "text": "Every day without this solution costs you money.",
+      "emphasis": "Every day"
+    },
+    "image_prompt": "urgency, opportunity, decisive moment"
   },
   ...
   {
@@ -120,7 +216,7 @@ OUTPUT FORMAT (JSON only, no markdown):
   }
 ]
 
-RESPOND WITH ONLY VALID JSON. Make this presentation so good it could close a deal.`;
+RESPOND WITH ONLY VALID JSON. Make this presentation so good it could close a deal. Use varied layouts to maintain engagement and avoid monotony.`;
 
   try {
     const message = await anthropic.messages.create({
