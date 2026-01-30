@@ -95,38 +95,32 @@ export default function CreateForm() {
     {
       id: 'sales_pitch' as PresentationType,
       label: 'Sales Pitch',
-      description: 'Convince prospects to buy',
-      icon: '💰'
+      description: 'Convince prospects to buy'
     },
     {
       id: 'roi_case' as PresentationType,
       label: 'ROI Case',
-      description: 'Business case with numbers',
-      icon: '📊'
+      description: 'Business case with numbers'
     },
     {
       id: 'demo' as PresentationType,
       label: 'Product Demo',
-      description: 'Show how it works',
-      icon: '🎯'
+      description: 'Show how it works'
     },
     {
       id: 'problem_solution' as PresentationType,
       label: 'Problem → Solution',
-      description: 'Address pain points',
-      icon: '🔧'
+      description: 'Address pain points'
     },
     {
       id: 'competitive' as PresentationType,
       label: 'Competitive Analysis',
-      description: 'Why choose us over them',
-      icon: '⚔️'
+      description: 'Why choose us over them'
     },
     {
       id: 'executive_briefing' as PresentationType,
       label: 'Executive Briefing',
-      description: 'High-level strategic overview',
-      icon: '👔'
+      description: 'High-level strategic overview'
     }
   ];
 
@@ -193,8 +187,7 @@ export default function CreateForm() {
                 }
               }}
             >
-              <div style={{ fontSize: '32px', marginBottom: '8px' }}>{type.icon}</div>
-              <div style={{ fontWeight: 600, marginBottom: '4px', fontSize: '16px' }}>
+              <div style={{ fontWeight: 600, marginBottom: '8px', fontSize: '16px' }}>
                 {type.label}
               </div>
               <div style={{ fontSize: '13px', opacity: 0.7, lineHeight: '1.4' }}>
