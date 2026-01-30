@@ -107,6 +107,10 @@ AVAILABLE SLIDE LAYOUTS:
 5. "comparison" - Two-column before/after or us vs them (use for differentiation, transformation)
 6. "timeline" - Horizontal steps/progression (use for implementation process, roadmap)
 7. "statement" - Single powerful sentence, minimal text (use for key insights, turning points)
+   - For STATEMENT slides: The "emphasis" field should highlight the MOST IMPACTFUL words
+   - Emphasize the punch line, the key contrast, or the surprising insight
+   - DO NOT just emphasize the first few words
+   - Example: "Your brightest students lose opportunities to inferior candidates" → emphasize "brightest students" or "inferior candidates"
 
 LAYOUT SELECTION STRATEGY:
 - Start with title slide
@@ -203,7 +207,7 @@ OUTPUT FORMAT (JSON only, no markdown):
     "title": "The Time to Act Is Now",
     "statement": {
       "text": "Every day without this solution costs you money.",
-      "emphasis": "Every day"
+      "emphasis": "costs you money"
     },
     "image_prompt": "urgency, opportunity, decisive moment"
   },

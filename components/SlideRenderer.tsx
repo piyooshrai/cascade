@@ -96,11 +96,26 @@ export default function SlideRenderer({ slide, theme }: SlideRendererProps) {
           <div className="slide-content-wrapper">
             <div className="statement-text">
               {slide.statement.emphasis ? (
-                <>
-                  <span className="statement-emphasis">{slide.statement.emphasis}</span>
-                  {' '}
-                  {slide.statement.text.replace(slide.statement.emphasis, '').trim()}
-                </>
+                (() => {
+                  const emphasisText = slide.statement.emphasis;
+                  const fullText = slide.statement.text;
+                  const startIndex = fullText.indexOf(emphasisText);
+
+                  if (startIndex === -1) {
+                    return fullText;
+                  }
+
+                  const before = fullText.substring(0, startIndex);
+                  const after = fullText.substring(startIndex + emphasisText.length);
+
+                  return (
+                    <>
+                      {before}
+                      <span className="statement-emphasis">{emphasisText}</span>
+                      {after}
+                    </>
+                  );
+                })()
               ) : (
                 slide.statement.text
               )}
