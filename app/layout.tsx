@@ -5,12 +5,11 @@ import "../styles/themes.css";
 export const metadata: Metadata = {
   title: "Cascade - AI-Powered Presentation Platform for Sales Teams",
   description: "Transform any URL into professional, persuasive sales presentations in seconds. No PowerPoint, no templates - just AI-generated slides ready to present. Choose from Executive, Minimal, or Tech themes designed for winning deals.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'),
   openGraph: {
     title: "Cascade - AI-Powered Presentation Platform for Sales Teams",
     description: "Transform any URL into professional, persuasive sales presentations in seconds. No PowerPoint, no templates - just AI-generated slides ready to present.",
     images: [{
-      url: '/og-image.png',
+      url: 'https://cascade-presentations.vercel.app/og-image.png',
       width: 1200,
       height: 630,
       alt: 'Cascade - AI-Powered Presentations from Any URL'
@@ -23,7 +22,7 @@ export const metadata: Metadata = {
     title: "Cascade - AI-Powered Presentation Platform for Sales Teams",
     description: "Transform any URL into professional, persuasive sales presentations in seconds. No PowerPoint, no templates - just AI-generated slides ready to present.",
     images: [{
-      url: '/og-image.png',
+      url: 'https://cascade-presentations.vercel.app/og-image.png',
       alt: 'Cascade - AI-Powered Presentations from Any URL'
     }],
   },
