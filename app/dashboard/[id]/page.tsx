@@ -89,38 +89,90 @@ export default function PresentationDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div style={{ minHeight: '100vh', background: '#0a0a0a', position: 'relative' }}>
       {/* Header Controls */}
-      <div className="absolute top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link
-            href="/dashboard"
-            className="text-blue-400 hover:text-blue-300"
-          >
-            ← Dashboard
-          </Link>
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 100,
+        padding: '20px 40px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+      }}>
+        <Link
+          href="/dashboard"
+          style={{
+            color: '#a0a0a0',
+            textDecoration: 'none',
+            fontSize: '14px',
+            fontWeight: 500,
+            transition: 'color 0.2s'
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.color = '#ffffff'}
+          onMouseLeave={(e) => e.currentTarget.style.color = '#a0a0a0'}
+        >
+          ← Dashboard
+        </Link>
 
-          <div className="flex items-center gap-4">
-            <button
-              onClick={copyShareLink}
-              className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
-            >
-              {copiedLink ? 'Link Copied!' : 'Copy Share Link'}
-            </button>
-            <button
-              onClick={handleDelete}
-              className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
-            >
-              Delete
-            </button>
-          </div>
+        <div style={{ display: 'flex', gap: '12px' }}>
+          <button
+            onClick={copyShareLink}
+            style={{
+              background: '#10b981',
+              color: '#ffffff',
+              border: 'none',
+              padding: '8px 16px',
+              borderRadius: '6px',
+              fontSize: '13px',
+              fontWeight: 600,
+              cursor: 'pointer',
+              transition: 'all 0.2s',
+              textTransform: 'none'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#059669';
+              e.currentTarget.style.transform = 'translateY(-1px)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#10b981';
+              e.currentTarget.style.transform = 'translateY(0)';
+            }}
+          >
+            {copiedLink ? 'Link Copied!' : 'Copy Share Link'}
+          </button>
+          <button
+            onClick={handleDelete}
+            style={{
+              background: '#ef4444',
+              color: '#ffffff',
+              border: 'none',
+              padding: '8px 16px',
+              borderRadius: '6px',
+              fontSize: '13px',
+              fontWeight: 600,
+              cursor: 'pointer',
+              transition: 'all 0.2s',
+              textTransform: 'none'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#dc2626';
+              e.currentTarget.style.transform = 'translateY(-1px)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#ef4444';
+              e.currentTarget.style.transform = 'translateY(0)';
+            }}
+          >
+            Delete
+          </button>
         </div>
       </div>
 
       {/* Presentation Viewer */}
-      <div className="pt-16">
-        <PresentationViewer presentation={presentation} />
-      </div>
+      <PresentationViewer presentation={presentation} />
     </div>
   );
 }
