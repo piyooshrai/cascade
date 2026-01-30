@@ -69,7 +69,7 @@ export default function PresentationViewer({
       {/* Client Badge */}
       {presentation.client_name && showControls && (
         <div className="client-badge">
-          Prepared for: {presentation.client_name}
+          FOR {presentation.client_name.toUpperCase()}
         </div>
       )}
 
