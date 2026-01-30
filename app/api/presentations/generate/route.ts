@@ -31,13 +31,15 @@ export async function POST(request: NextRequest) {
     try {
       scrapedContent = await scrapeURL(source_url);
     } catch (scrapeError) {
-      console.error('Scraping failed, using fallback content:', scrapeError);
-      // Fallback: Use placeholder content if scraping fails
-      scrapedContent = {
-        title: title,
-        content: `Company overview and services for ${title}. Our innovative platform provides cutting-edge solutions that transform how businesses operate. With proven results and industry-leading technology, we help organizations achieve their goals faster and more efficiently. Key benefits include increased productivity, reduced costs, streamlined workflows, and measurable ROI. Our expert team delivers world-class support and ensures successful implementation. Join thousands of satisfied clients who have revolutionized their operations with our platform.`,
-        url: source_url
-      };
+      console.error('Scraping failed:', scrapeError);
+      return NextResponse.json(
+        {
+          error: 'Unable to access the provided URL',
+          details: scrapeError instanceof Error ? scrapeError.message : 'Failed to fetch content from URL',
+          suggestion: 'The website may be blocking automated access. Try a different URL or check if the site is publicly accessible.'
+        },
+        { status: 400 }
+      );
     }
 
     // Step 2: Generate slides with AI
