@@ -83,7 +83,7 @@ export default function PresentationViewer({
       {/* Navigation Hint */}
       {showControls && currentSlide === 0 && (
         <div className="nav-hint">
-          Use arrow keys or click to navigate • ESC to exit
+          Use arrow keys or click to navigate • Press F for presentation mode
         </div>
       )}
 
