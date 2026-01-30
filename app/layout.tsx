@@ -3,28 +3,28 @@ import "./globals.css";
 import "../styles/themes.css";
 
 export const metadata: Metadata = {
-  title: "Cascade - AI-Powered Presentation Platform for Sales Teams",
-  description: "Transform any URL into professional, persuasive sales presentations in seconds. No PowerPoint, no templates - just AI-generated slides ready to present. Choose from Executive, Minimal, or Tech themes designed for winning deals.",
+  title: "Cascade - Presentation Platform",
+  description: "Transform any URL into professional sales presentations in seconds. No PowerPoint, no templates - just results.",
   metadataBase: new URL('https://cascade-gray.vercel.app'),
   openGraph: {
-    title: "Cascade - AI-Powered Presentation Platform for Sales Teams",
-    description: "Transform any URL into professional, persuasive sales presentations in seconds. No PowerPoint, no templates - just AI-generated slides ready to present.",
+    title: "Cascade - Presentation Platform",
+    description: "Transform any URL into professional sales presentations in seconds. No PowerPoint, no templates - just results.",
     images: [{
       url: '/og-image.png',
       width: 1200,
       height: 630,
-      alt: 'Cascade - AI-Powered Presentations from Any URL'
+      alt: 'Cascade - Professional Presentations from Any URL'
     }],
     type: 'website',
     siteName: 'Cascade'
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Cascade - AI-Powered Presentation Platform for Sales Teams",
-    description: "Transform any URL into professional, persuasive sales presentations in seconds. No PowerPoint, no templates - just AI-generated slides ready to present.",
+    title: "Cascade - Presentation Platform",
+    description: "Transform any URL into professional sales presentations in seconds. No PowerPoint, no templates - just results.",
     images: [{
       url: '/og-image.png',
-      alt: 'Cascade - AI-Powered Presentations from Any URL'
+      alt: 'Cascade - Professional Presentations from Any URL'
     }],
   },
   icons: {
