@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Home() {
   return (
@@ -19,18 +20,15 @@ export default function Home() {
         textAlign: 'center'
       }}>
         {/* Main Heading */}
-        <h1 style={{
-          fontSize: 'clamp(48px, 8vw, 96px)',
-          fontWeight: 700,
-          marginBottom: '24px',
-          letterSpacing: '-2px',
-          background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text'
-        }}>
-          Cascade
-        </h1>
+        <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'center' }}>
+          <Image
+            src="/logo.png"
+            alt="Cascade"
+            width={360}
+            height={90}
+            priority
+          />
+        </div>
 
         {/* Subtitle */}
         <p style={{
