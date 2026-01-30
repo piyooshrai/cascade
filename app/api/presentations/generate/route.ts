@@ -30,13 +30,14 @@ export async function POST(request: NextRequest) {
     const scrapedContent = await scrapeURL(source_url);
 
     // Step 2: Generate slides with AI
-    console.log('Generating slides with AI...');
+    console.log(`Generating slides with AI for theme: ${theme}...`);
     const slides = await generateSlides(
       scrapedContent.content,
       title,
       client_name || null,
       theme
     );
+    console.log(`Successfully generated ${slides.length} slides`);
 
     // Step 3: Generate unique share token
     const shareToken = uuidv4();
@@ -46,6 +47,7 @@ export async function POST(request: NextRequest) {
     const userId = '00000000-0000-0000-0000-000000000000'; // Placeholder
 
     // Step 5: Save to database
+    console.log(`Saving presentation to database with theme: ${theme}`);
     const supabase = getServerSupabase();
     const { data: presentation, error } = await supabase
       .from('presentations')
@@ -60,6 +62,10 @@ export async function POST(request: NextRequest) {
       })
       .select()
       .single();
+
+    if (presentation) {
+      console.log(`Successfully saved presentation with ID: ${presentation.id}`);
+    }
 
     if (error) {
       console.error('Database error:', error);
