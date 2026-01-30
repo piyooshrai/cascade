@@ -143,13 +143,14 @@ export default function SlideRenderer({ slide, theme }: SlideRendererProps) {
 
     // Timeline Layout - Horizontal progression
     if (layout === 'timeline' && slide.timeline) {
+      const timelineSteps = slide.timeline.steps;
       return (
         <div className="slide-container-timeline">
           <div className="slide-background" />
           <div className="slide-content-wrapper">
             <h2 className="slide-title-timeline">{slide.title}</h2>
             <div className="timeline-display">
-              {slide.timeline.steps.map((step, index) => (
+              {timelineSteps.map((step, index) => (
                 <div key={index} className="timeline-step">
                   <div className="timeline-number">{index + 1}</div>
                   <div className="timeline-content">
@@ -159,7 +160,7 @@ export default function SlideRenderer({ slide, theme }: SlideRendererProps) {
                       <div className="timeline-duration">{step.duration}</div>
                     )}
                   </div>
-                  {index < slide.timeline.steps.length - 1 && (
+                  {index < timelineSteps.length - 1 && (
                     <div className="timeline-connector" />
                   )}
                 </div>
