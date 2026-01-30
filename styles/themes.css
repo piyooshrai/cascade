@@ -425,3 +425,97 @@
   cursor: not-allowed;
   opacity: 0;
 }
+
+/* ===== CENTERED PRESENTATION LAYOUT (OVERRIDE) ===== */
+.presentation-viewer {
+  background: #0a0a0a !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 40px !important;
+}
+
+.presentation-slide {
+  width: 100% !important;
+  max-width: 1400px !important;
+  height: 85vh !important;
+  max-height: 800px !important;
+  background: #1a1a1a !important;
+  border-radius: 16px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* TWO-COLUMN LAYOUT FOR TITLE SLIDES */
+.slide-container-title {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 60px !important;
+  align-items: center !important;
+  padding: 60px 80px !important;
+  height: 100% !important;
+}
+
+.slide-container-title .slide-content-wrapper {
+  text-align: left !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+.slide-container-title .slide-image {
+  width: 100%;
+  height: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Update client badge positioning */
+.client-badge {
+  position: absolute !important;
+  top: 24px !important;
+  right: 24px !important;
+  background: rgba(59, 130, 246, 0.2) !important;
+  border: 1px solid rgba(59, 130, 246, 0.4) !important;
+  color: #3b82f6 !important;
+  padding: 8px 16px !important;
+  border-radius: 6px !important;
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  font-weight: 600 !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+/* Update slide counter */
+.slide-counter {
+  position: absolute !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+  color: #a0a0a0 !important;
+  padding: 8px 16px !important;
+  border-radius: 6px !important;
+  font-size: 14px !important;
+  font-family: 'IBM Plex Mono', monospace !important;
+}
+
+/* Hide nav hint in centered layout */
+.nav-hint {
+  display: none !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .slide-container-title {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+    padding: 40px !important;
+  }
+  
+  .slide-container-title .slide-image {
+    max-height: 300px;
+  }
+}
