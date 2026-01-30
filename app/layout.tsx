@@ -5,7 +5,7 @@ import "../styles/themes.css";
 export const metadata: Metadata = {
   title: "Cascade - AI-Powered Presentation Platform for Sales Teams",
   description: "Transform any URL into professional, persuasive sales presentations in seconds. No PowerPoint, no templates - just AI-generated slides ready to present. Choose from Executive, Minimal, or Tech themes designed for winning deals.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000'),
+  metadataBase: new URL('https://cascade-gray.vercel.app'),
   openGraph: {
     title: "Cascade - AI-Powered Presentation Platform for Sales Teams",
     description: "Transform any URL into professional, persuasive sales presentations in seconds. No PowerPoint, no templates - just AI-generated slides ready to present.",
