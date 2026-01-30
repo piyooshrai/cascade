@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: "Cascade - Presentation Platform",
     description: "Transform any URL into professional sales presentations in seconds. No PowerPoint, no templates - just results.",
     images: [{
-      url: '/og-image.png',
+      url: '/og-image.jpg',
       width: 1200,
       height: 630,
       alt: 'Cascade - Professional Presentations from Any URL'
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     title: "Cascade - Presentation Platform",
     description: "Transform any URL into professional sales presentations in seconds. No PowerPoint, no templates - just results.",
     images: [{
-      url: '/og-image.png',
+      url: '/og-image.jpg',
       alt: 'Cascade - Professional Presentations from Any URL'
     }],
   },
