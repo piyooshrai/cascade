@@ -1008,6 +1008,19 @@
   .comparison-divider {
     display: none;
   }
+
+  .timeline-display {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .timeline-connector {
+    display: none;
+  }
+
+  .slide-title-image-full {
+    font-size: 3.5rem;
+  }
 }
 
 /* Mobile-specific layout adjustments */
@@ -1063,19 +1076,5 @@
 
   .timeline-description {
     font-size: 1rem;
-  }
-}
-
-  .timeline-display {
-    flex-direction: column;
-    gap: 3rem;
-  }
-
-  .timeline-connector {
-    display: none;
-  }
-
-  .slide-title-image-full {
-    font-size: 3.5rem;
   }
 }
