@@ -447,6 +447,18 @@
   overflow: hidden !important;
 }
 
+/* Theme-specific slide backgrounds */
+.theme-minimal .presentation-slide {
+  background: #ffffff !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid #e5e5e5 !important;
+}
+
+.theme-tech .presentation-slide {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+  box-shadow: 0 20px 60px rgba(59, 130, 246, 0.2) !important;
+}
+
 /* TWO-COLUMN LAYOUT FOR TITLE SLIDES */
 .slide-container-title {
   display: grid !important;
