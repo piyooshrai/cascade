@@ -11,6 +11,14 @@ export type SlideLayout =
 
 export type Theme = 'executive' | 'minimal' | 'tech';
 
+export type PresentationType =
+  | 'sales_pitch'
+  | 'roi_case'
+  | 'demo'
+  | 'problem_solution'
+  | 'competitive'
+  | 'executive_briefing';
+
 export type UserRole = 'admin' | 'editor' | 'viewer';
 
 export interface Slide {
@@ -85,6 +93,14 @@ export interface CreatePresentationRequest {
   title: string;
   client_name?: string;
   theme: Theme;
+  presentation_type?: PresentationType;
+  additional_context?: {
+    additional_urls?: string[];
+    discovery_notes?: string;
+    budget_range?: string;
+    timeline?: string;
+    audience_type?: string;
+  };
 }
 
 export interface UpdatePresentationRequest {

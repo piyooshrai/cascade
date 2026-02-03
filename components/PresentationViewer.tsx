@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import type { Presentation } from '@/lib/types';
 import SlideRenderer from './SlideRenderer';
 
@@ -15,6 +15,8 @@ export default function PresentationViewer({
 }: PresentationViewerProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = presentation.slides.length;
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
 
   const goToNextSlide = useCallback(() => {
     setCurrentSlide((prev) => Math.min(prev + 1, totalSlides - 1));
@@ -28,6 +30,7 @@ export default function PresentationViewer({
     setCurrentSlide(Math.max(0, Math.min(index, totalSlides - 1)));
   }, [totalSlides]);
 
+  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight' || e.key === ' ') {
@@ -54,10 +57,39 @@ export default function PresentationViewer({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [goToNextSlide, goToPreviousSlide, goToSlide, totalSlides]);
 
+  // Touch/swipe navigation
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const swipeThreshold = 50;
+    const diff = touchStartX.current - touchEndX.current;
+
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        // Swiped left - next slide
+        goToNextSlide();
+      } else {
+        // Swiped right - previous slide
+        goToPreviousSlide();
+      }
+    }
+  };
+
   const themeClass = `theme-${presentation.theme}`;
 
   return (
-    <div className={`presentation-viewer ${themeClass}`}>
+    <div
+      className={`presentation-viewer ${themeClass}`}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Slide Content */}
       <div className="presentation-slide" key={currentSlide}>
         <SlideRenderer
@@ -83,23 +115,47 @@ export default function PresentationViewer({
       {/* Navigation Hint */}
       {showControls && currentSlide === 0 && (
         <div className="nav-hint">
-          Use arrow keys or click to navigate • Press F for presentation mode
+          Swipe or tap edges to navigate
         </div>
       )}
 
-      {/* Click Areas for Navigation */}
+      {/* Click/Tap Areas for Navigation */}
       <div className="presentation-nav-areas">
         <button
           onClick={goToPreviousSlide}
           className="presentation-nav-prev"
           aria-label="Previous slide"
           disabled={currentSlide === 0}
+          style={{
+            position: 'fixed',
+            left: 0,
+            top: 0,
+            bottom: 0,
+            width: '20%',
+            background: 'transparent',
+            border: 'none',
+            cursor: currentSlide === 0 ? 'default' : 'pointer',
+            zIndex: 50,
+            opacity: 0
+          }}
         />
         <button
           onClick={goToNextSlide}
           className="presentation-nav-next"
           aria-label="Next slide"
           disabled={currentSlide === totalSlides - 1}
+          style={{
+            position: 'fixed',
+            right: 0,
+            top: 0,
+            bottom: 0,
+            width: '20%',
+            background: 'transparent',
+            border: 'none',
+            cursor: currentSlide === totalSlides - 1 ? 'default' : 'pointer',
+            zIndex: 50,
+            opacity: 0
+          }}
         />
       </div>
     </div>
