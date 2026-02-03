@@ -1061,6 +1061,11 @@
     font-size: 1.75rem;
   }
 
+  .slide-title-timeline {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
   .comparison-label {
     font-size: 1.25rem;
   }
@@ -1076,5 +1081,46 @@
 
   .timeline-description {
     font-size: 1rem;
+  }
+
+  /* Force timeline to stack vertically on mobile */
+  .timeline-display {
+    flex-direction: column !important;
+    gap: 2.5rem !important;
+    align-items: center !important;
+  }
+
+  .timeline-step {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .timeline-number {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .timeline-connector {
+    display: none !important;
+  }
+
+  .timeline-duration {
+    font-size: 0.875rem;
+  }
+
+  /* Force comparison to stack vertically on mobile */
+  .comparison-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .comparison-divider {
+    display: none !important;
+  }
+
+  .comparison-items {
+    gap: 1rem;
   }
 }
